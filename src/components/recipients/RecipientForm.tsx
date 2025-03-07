@@ -26,7 +26,7 @@ import {
 import { addRecipient } from "@/lib/actions/recipientActions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getCourses } from "@/lib/actions/courseActions";
 import LoadingSpinner from "../LoadingSpinner";
 
@@ -159,4 +159,4 @@ export function RecipientForm() {
       </form>
     </Form>
   );
-} 
+}
