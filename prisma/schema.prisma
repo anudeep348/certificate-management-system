@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  firstName   String?
+  lastName    String?
+  fullName    String
+  externalId  String @unique
+  createdAt   DateTime @default(now())
+  courses     Course[] 
+
+  @@index([email])
+}
+
+model Course {
+  id          String   @id @default(uuid())
+  name        String   
+  startDate   DateTime
+  endDate     DateTime
+  description String
+  templateUrl String   
+  badgeUrl    String   
+  createdBy   String
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  recipients  Recipient[]
+  certificates Certificate[]
+  
+  @@index([createdBy])
+}
+
+model Recipient {
+  id          String   @id @default(uuid())
+  name        String
+  email       String   @unique
+  courseId    String
+  certificate Certificate?
+
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@index([courseId])
+}
+
+model Certificate {
+  id          String   @id @default(uuid())
+  recipientId String   @unique
+  courseId    String 
+  qrCodeUrl   String   
+  pdfUrl      String
+  issuedAt    DateTime @default(now())
+
+  recipient   Recipient @relation(fields: [recipientId], references: [id], onDelete: Cascade)
+  course      Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+@@index([courseId])
+}
+
+
