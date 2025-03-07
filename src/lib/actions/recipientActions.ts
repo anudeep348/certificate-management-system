@@ -51,11 +51,21 @@ export async function addRecipient(data: RecipientData) {
 
   try {
     //1) fetching  templates & badges from R2 bucket and create a buffer
-    const certRes = await fetch(course.templateUrl);
+    // const certRes = await fetch(course.templateUrl);
+    const [certRes, badge, fontRes, slabRes] = await Promise.all([
+      fetch(course.templateUrl),
+      fetch(course.badgeUrl),
+      fetch(
+        "https://github.com/google/fonts/raw/main/ofl/alexbrush/AlexBrush-Regular.ttf"
+      ),
+      fetch(
+        "https://fonts.gstatic.com/s/robotoslab/v24/BngMUXZYTXPIvIBgJJSb6ufN5qU.woff2"
+      ),
+    ]);
     if (!certRes.ok) throw new Error("Failed to fetch certificate template");
     const certBuffer = await certRes.arrayBuffer();
 
-    const badge = await fetch(course.badgeUrl);
+    // const badge = await fetch(course.badgeUrl);
     if (!badge.ok) {
       throw new Error("Failed to fetch badge template");
     }
@@ -97,12 +107,12 @@ export async function addRecipient(data: RecipientData) {
     const page = pdfDoc.addPage([certWidth, certHeight]);
 
     //Fetching Font to use
-    const fontRes = await fetch(
-      "https://github.com/google/fonts/raw/main/ofl/alexbrush/AlexBrush-Regular.ttf"
-    );
-    const slabRes = await fetch(
-      "https://fonts.gstatic.com/s/robotoslab/v24/BngMUXZYTXPIvIBgJJSb6ufN5qU.woff2"
-    );
+    // const fontRes = await fetch(
+    //   "https://github.com/google/fonts/raw/main/ofl/alexbrush/AlexBrush-Regular.ttf"
+    // );
+    // const slabRes = await fetch(
+    //   "https://fonts.gstatic.com/s/robotoslab/v24/BngMUXZYTXPIvIBgJJSb6ufN5qU.woff2"
+    // );
     const fontBytes = await fontRes.arrayBuffer();
     const slabBytes = await slabRes.arrayBuffer();
 
