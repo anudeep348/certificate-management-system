@@ -22,7 +22,7 @@ function Page() {
   });
 
   useEffect(() => {
-    if (data?.isSynced) router.push("/");
+    if (data?.isSynced) router.push("/dashboard");
   }, [data, router]);
 
   return (

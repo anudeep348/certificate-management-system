@@ -31,7 +31,7 @@ export async function getCertificates() {
       id: val.id,
       recipientName: val.recipient.name,
       recipientEmail: val.recipient.email,
-      courseId:val.course.id,
+      courseId: val.course.id,
       courseName: val.course.name,
       generatedAt: val.issuedAt,
       certificateUrl: val.qrCodeUrl,

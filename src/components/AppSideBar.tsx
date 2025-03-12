@@ -20,6 +20,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
 import { SignOutButton } from "@clerk/nextjs";
+import { cn } from "@/lib/utils";
 
 function AppSideBar() {
   const pathname = usePathname();
@@ -28,7 +29,7 @@ function AppSideBar() {
     {
       title: "Dashboard",
       icon: LayoutDashboard,
-      href: "/",
+      href: "/dashboard",
     },
     {
       title: "Courses",
@@ -51,7 +52,7 @@ function AppSideBar() {
     <Sidebar>
       <SidebarHeader className="flex items-center px-4 py-2 mb-4">
         <div className="flex items-center gap-2 py-4">
-          <Award className="h-6 w-6" />
+          <Award className="h-6 w-6 text-primary" />
           <span className="text-lg font-bold">CertifyPro</span>
         </div>
       </SidebarHeader>
@@ -63,7 +64,10 @@ function AppSideBar() {
                 asChild
                 isActive={pathname === item.href}
                 tooltip={item.title}
-                className="text-base mb-3 p-2"
+                className={cn(
+                  "text-base mb-3 p-2",
+                  pathname === item.href ? "bg-primary text-white" : ""
+                )}
               >
                 <Link href={item.href}>
                   <item.icon className="h-5 w-5" />

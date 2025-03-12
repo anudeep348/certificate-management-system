@@ -1,5 +1,10 @@
 import { SignUp } from "@clerk/nextjs";
 
 export default function Page() {
-  return <SignUp signInForceRedirectUrl={"/"} forceRedirectUrl={"/welcome"} />;
+  return (
+    <SignUp
+      signInForceRedirectUrl={"/dashboard"}
+      forceRedirectUrl={"/welcome"}
+    />
+  );
 }
