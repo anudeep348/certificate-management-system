@@ -89,7 +89,7 @@ function Pricing() {
               </CardContent>
               <CardFooter>
                 <Button className="w-full" variant="outline" asChild>
-                  <Link href="/register?plan=starter">Start Free Trial</Link>
+                  <Link href="/signup">Start Free Trial</Link>
                 </Button>
               </CardFooter>
             </Card>
@@ -131,9 +131,7 @@ function Pricing() {
               </CardContent>
               <CardFooter>
                 <Button className="w-full" asChild>
-                  <Link href="/register?plan=professional">
-                    Start Free Trial
-                  </Link>
+                  <Link href="/signup">Start Free Trial</Link>
                 </Button>
               </CardFooter>
             </Card>
@@ -177,7 +175,7 @@ function Pricing() {
               </CardContent>
               <CardFooter>
                 <Button className="w-full" variant="outline" asChild>
-                  <Link href="/contact-sales">Contact Sales</Link>
+                  <Link href="/signup">Contact Sales</Link>
                 </Button>
               </CardFooter>
             </Card>

@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Award, Menu, X } from "lucide-react";
-import { useUser } from "@clerk/nextjs";
+import { SignOutButton, useUser } from "@clerk/nextjs";
+import { cn } from "@/lib/utils";
 
 function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -28,16 +29,16 @@ function NavBar() {
             Features
           </Link>
           <Link
-            href="#pricing"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground"
-          >
-            Pricing
-          </Link>
-          <Link
             href="#testimonials"
             className="text-sm font-medium text-muted-foreground hover:text-foreground"
           >
             Testimonials
+          </Link>
+          <Link
+            href="#pricing"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground"
+          >
+            Pricing
           </Link>
           <Link
             href="#faq"
@@ -58,9 +59,14 @@ function NavBar() {
 
           {isSignedIn ? (
             <>
-              <Button variant="signout" asChild>
-                <Link href="/signout">Logout</Link>
-              </Button>
+              <div
+                className={cn(
+                  buttonVariants({ variant: "signout" }),
+                  "cursor-pointer"
+                )}
+              >
+                <SignOutButton signOutOptions={{ redirectUrl: "/" }} />
+              </div>
 
               <Button asChild>
                 <Link href="/dashboard">Dashboard</Link>
@@ -103,18 +109,18 @@ function NavBar() {
               Features
             </Link>
             <Link
-              href="#pricing"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Pricing
-            </Link>
-            <Link
               href="#testimonials"
               className="text-sm font-medium text-muted-foreground hover:text-foreground"
               onClick={() => setMobileMenuOpen(false)}
             >
               Testimonials
+            </Link>
+            <Link
+              href="#pricing"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Pricing
             </Link>
             <Link
               href="#faq"
